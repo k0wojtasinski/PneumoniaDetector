@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  tensorflow_serving:
+    image: tensorflow/serving:2.4.1
+    volumes:
+      - type: bind
+        source: ./models
+        target: /models
+    command: --model_config_file=/models/models.conf
+    ports:
+      - "8501:8501"
+  backend:
+    build: .
+    ports: 
+      - "8000:8000"
+
