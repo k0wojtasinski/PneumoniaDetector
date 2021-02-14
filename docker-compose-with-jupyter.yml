@@ -6,7 +6,7 @@ services:
     volumes:
       - type: bind
         source: ./models
-        target: /home/jovyan/models
+        target: /models
     command: --model_config_file=/models/models.conf
     ports:
       - "8501:8501"
@@ -14,4 +14,14 @@ services:
     build: .
     ports: 
       - "8000:8000"
+
+  notebooks:
+    image: jupyter/tensorflow-notebook
+    volumes: 
+    - type: bind
+      source: ./notebooks
+      target: /home/jovyan/work
+
+    ports:
+      - "8888:8888"
 
